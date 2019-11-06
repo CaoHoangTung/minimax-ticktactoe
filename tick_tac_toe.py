@@ -1,4 +1,3 @@
-import Bot
 import Bot2
 import Game 
 
