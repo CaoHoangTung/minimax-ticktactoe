@@ -1,4 +1,4 @@
-# 19683 game states
+# THIS BOT APPLY THE MINIMAX ALGORITHM
 
 import Operator as op
 import math
@@ -67,7 +67,7 @@ class Bot2():
 
                 if self.simulation.board[i][j] != 0:
                     continue
-                # print("MOVE",i,j,player,self.turn,_minimizing,_level)
+
                 self.simulation.make_a_move(i,j,player)
                 new_node_index = self.__build_tree(_minimizing = not _minimizing, _level = _level+1)
                 self.tree.nodes[new_node_index].index = new_node_index
@@ -81,8 +81,6 @@ class Bot2():
 
                 self.simulation.undo_a_move()
                 
-        # self.simulation.show_game_state()
-        # print(index,self.tree.nodes[index].value,self.tree.nodes[index].childs,self.alpha,self.beta)
         return index
 
     def generate_states(self): # build tree
@@ -97,30 +95,23 @@ class Bot2():
                 return
 
     def make_decision(self):
-        # print(self.current_game_state["tree_index"])
-        # print(self.tree.nodes[self.current_game_state["tree_index"]].childs)
         if (self.turn == "first"): # bot is maximizing
-            # print("maximizing")
-
             optimal_point = -10
             optimal_move = (-1,-1)
             for index in self.tree.nodes[self.current_game_state["tree_index"]].childs:
                 node = self.tree.nodes[index]
                 if (self.game.board[node.move[0]][node.move[1]] != 0):
                     continue
-                print(node)
                 
                 if optimal_point < node.value:
                     optimal_point = node.value
                     optimal_move = node.move
         else: # bot is minimizing
-            # print("minimizing")
             optimal_point = 10 
             optimal_move = (0,0)
             
             for index in self.tree.nodes[self.current_game_state["tree_index"]].childs:
                 node = self.tree.nodes[index]
-                print(node)
 
                 if (self.game.board[node.move[0]][node.move[1]] != 0):
                     continue
@@ -129,7 +120,3 @@ class Bot2():
                     optimal_move = node.move
 
         return optimal_move
-
-# bot = Bot2()
-# bot.generate_states()
-# bot.test()

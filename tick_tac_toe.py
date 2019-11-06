@@ -17,38 +17,39 @@ def user_make_a_move(game):
     
 
 def main():
-    game = Game.Game(_game_size=3,_to_win=3)
-    # bot = Bot.Bot(_game_size=3)
-    # while (not game.game_finished):
-    #     user_make_a_move(game)
-    #     game.show_game_state()
-        
-    #     if game.game_finished:
-    #         break  
-        
-    #     bot_decision = bot.make_decision(game)
-    #     # print("bot go",bot_decision)
-    #     game.make_a_move(bot_decision[0],bot_decision[1],machine)
-    #     game.show_game_state()
+    game = Game.Game()
 
-    #     print(game.game_result())
+    bot_turn = "first"
 
-    bot = Bot2.Bot2(_game=game,_turn='second')
+    bot = Bot2.Bot2(_game=game,_turn=bot_turn)
     bot.generate_states()
     while (not game.game_finished):
-
-        move = user_make_a_move(game)
-        game.show_game_state()
-        bot.update_tree_position(move)
-        
-        if game.game_finished:
-            break  
-        
-        bot_decision = bot.make_decision()
-        print("bot go",bot_decision)
-        game.make_a_move(bot_decision[0],bot_decision[1],machine)
-        game.show_game_state()
-        bot.update_tree_position(bot_decision)
+        if (bot_turn == "first"):
+            bot_decision = bot.make_decision()
+            print("bot go",bot_decision)
+            game.make_a_move(bot_decision[0],bot_decision[1],machine)
+            game.show_game_state()
+            bot.update_tree_position(bot_decision)
+            
+            if game.game_finished:
+                break  
+            
+            move = user_make_a_move(game)
+            game.show_game_state()
+            bot.update_tree_position(move)
+        elif (bot_turn == "second"):
+            move = user_make_a_move(game)
+            game.show_game_state()
+            bot.update_tree_position(move)
+            
+            if game.game_finished:
+                break  
+            
+            bot_decision = bot.make_decision()
+            print("bot go",bot_decision)
+            game.make_a_move(bot_decision[0],bot_decision[1],machine)
+            game.show_game_state()
+            bot.update_tree_position(bot_decision)
 
     print(game.game_result())
 

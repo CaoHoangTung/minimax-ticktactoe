@@ -41,37 +41,7 @@ class Game():
         self.game_finished = False
         return last_move
 
-    # def __seek_winner(self,_position,_direction,_cur_step=0):
-    #     # directions: 
-    #     # 0 1 2 
-    #     # 7 x 3
-    #     # 6 5 4
-    #     if self.board[_position[0]][_position[1]] == 0:
-    #         return 0
-    #     if _cur_step == self.to_win:
-    #         return self.board[_position[0]][_position[1]]
-        
-    #     next_position = (_position[0]+self.direction_to_shift[_direction][0],
-    #                      _position[1]+self.direction_to_shift[_direction][1])
-
-    #     return self.__seek_winner(_position=next_position,_direction=_direction,_cur_step=_cur_step+1)
-
     def game_result(self):
-        # winner = 0
-        # for i in range(self.game_size):
-        #     for j in range(self.game_size):
-        #         for direction in range(8):
-        #             temp_winner = self.__seek_winner(_position=(i,j),_direction=direction)
-        #             if (temp_winner != 0):
-        #                 winner = temp_winner
-        #                 break
-        
-        # if winner == 0:
-        #     return "tie!"
-        # elif winner == user:
-        #     return "you win"
-        # elif winner == machine:
-        #     return "machine wins"
         if (self.board[0] == [machine,machine,machine] or
             self.board[1] == [machine,machine,machine] or
             self.board[2] == [machine,machine,machine] or
